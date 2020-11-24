@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.jo.trudoctask.list.presentation.view_model.BusinessListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvBusinessesList"
+            viewState="@{viewModel.viewStateLiveData}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="@{viewModel.viewStateLiveData.isEmpty? View.GONE:View.VISIBLE}"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".list.presentation.view.BusinessListFragment"
+            tools:itemCount="5"
+            tools:listitem="@layout/business_item"
+            tools:visibility="visible" />
+
+        <!--android:visibility="@{viewModel.viewStateLiveData.isLoading?View.VISIBLE:View.GONE}"-->
+        <ProgressBar
+            android:id="@+id/pbLoadingBusinessesList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/businessesListErrorContainer"
+            layout="@layout/business_error_view"
+            android:visibility="@{viewModel.viewStateLiveData.error!=null?View.VISIBLE:View.GONE}"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/businessesListEmptyContainer"
+            layout="@layout/business_empty_view"
+            android:visibility="@{viewModel.viewStateLiveData.isEmpty?View.VISIBLE:View.GONE}"
+            tools:visibility="gone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="business_list_item_thumb_size">150dp</dimen>
+    <dimen name="business_list_item_title_margin_h">24dp</dimen>
+    <dimen name="business_list_item_title_text_size">18sp</dimen>
+    <dimen name="business_list_item_description_text_size">12sp</dimen>
+    <dimen name="business_list_item_text_margin_v">8dp</dimen>
+    <dimen name="business_list_item_rating_width">100dp</dimen>
+    <dimen name="business_list_item_rating_height">20dp</dimen>
+    <dimen name="business_list_item_margin_h">10dp</dimen>
+    <dimen name="business_list_item_margin_v">4dp</dimen>
+    <dimen name="business_list_item_corner_radius">10dp</dimen>
+</resources>
