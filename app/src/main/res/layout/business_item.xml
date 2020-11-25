@@ -1,91 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/business_list_item_margin_h"
-    android:layout_marginEnd="@dimen/business_list_item_margin_h"
-    android:layout_marginTop="@dimen/business_list_item_margin_v"
-    android:layout_marginBottom="@dimen/business_list_item_margin_v"
-    app:cardCornerRadius="@dimen/business_list_item_corner_radius">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="business"
+            type="com.jo.trudoctask.list.domain.model.Business" />
+    </data>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="ContentDescription">
+        android:layout_marginStart="@dimen/business_list_item_margin_h"
+        android:layout_marginTop="@dimen/business_list_item_margin_v"
+        android:layout_marginEnd="@dimen/business_list_item_margin_h"
+        android:layout_marginBottom="@dimen/business_list_item_margin_v"
+        app:cardCornerRadius="@dimen/business_list_item_corner_radius">
 
-
-        <ImageView
-            android:id="@+id/ivBusinessImage"
-            android:layout_width="@dimen/business_list_item_thumb_size"
-            android:layout_height="0dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-        <TextView
-            android:id="@+id/tvBusinessName"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/business_list_item_title_margin_h"
-            android:layout_marginTop="@dimen/business_list_item_text_margin_v"
-            android:layout_marginEnd="@dimen/business_list_item_title_margin_h"
-            android:maxLines="2"
-            android:textSize="@dimen/business_list_item_title_text_size"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivBusinessImage"
-            app:layout_constraintTop_toTopOf="@+id/ivBusinessImage"
-            tools:text="Business Name" />
+            tools:ignore="ContentDescription">
 
-        <TextView
-            android:id="@+id/tvBusinessCategory"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/business_list_item_text_margin_v"
-            android:maxLines="2"
-            android:textSize="@dimen/business_list_item_description_text_size"
-            app:layout_constraintEnd_toEndOf="@+id/tvBusinessName"
-            app:layout_constraintStart_toStartOf="@+id/tvBusinessName"
-            app:layout_constraintTop_toBottomOf="@+id/tvBusinessName"
-            tools:text="Business Category" />
+            <!--               -->
+            <ImageView
+                android:id="@+id/ivBusinessImage"
+                android:layout_width="@dimen/business_list_item_thumb_size"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{business.imageUrl}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-        <RatingBar
-            android:id="@+id/rbBusinessesRating"
-            style="?android:attr/ratingBarStyleIndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/business_list_item_text_margin_v"
-            app:layout_constraintStart_toStartOf="@+id/tvBusinessName"
-            app:layout_constraintTop_toBottomOf="@+id/tvBusinessCategory" />
+            <TextView
+                android:id="@+id/tvBusinessName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/business_list_item_title_margin_h"
+                android:layout_marginTop="@dimen/business_list_item_text_margin_v"
+                android:layout_marginEnd="@dimen/business_list_item_title_margin_h"
+                android:maxLines="2"
+                android:text="@{business.name}"
+                android:textSize="@dimen/business_list_item_title_text_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivBusinessImage"
+                app:layout_constraintTop_toTopOf="@+id/ivBusinessImage"
+                tools:text="Business Name" />
 
-        <TextView
-            android:id="@+id/tvBusinessPrice"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/business_list_item_text_margin_v"
-            android:maxLines="2"
-            android:textSize="@dimen/business_list_item_description_text_size"
-            app:layout_constraintEnd_toEndOf="@+id/tvBusinessName"
-            app:layout_constraintStart_toStartOf="@+id/tvBusinessName"
-            app:layout_constraintTop_toBottomOf="@+id/rbBusinessesRating"
-            tools:text="Business Price" />
+            <TextView
+                android:id="@+id/tvBusinessCategory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/business_list_item_text_margin_v"
+                android:maxLines="2"
+                android:text="@{business.getCategoriesString()}"
+                android:textSize="@dimen/business_list_item_description_text_size"
+                app:layout_constraintEnd_toEndOf="@+id/tvBusinessName"
+                app:layout_constraintStart_toStartOf="@+id/tvBusinessName"
+                app:layout_constraintTop_toBottomOf="@+id/tvBusinessName"
+                tools:text="Business Category" />
 
-        <TextView
-            android:id="@+id/tvBusinessReviewCount"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/business_list_item_text_margin_v"
-            android:maxLines="2"
-            android:paddingBottom="@dimen/business_list_item_text_margin_v"
-            android:textSize="@dimen/business_list_item_description_text_size"
-            app:layout_constraintEnd_toEndOf="@+id/tvBusinessName"
-            app:layout_constraintStart_toStartOf="@+id/tvBusinessName"
-            app:layout_constraintTop_toBottomOf="@+id/tvBusinessPrice"
-            tools:text="Business Review Count" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+            <RatingBar
+                android:id="@+id/rbBusinessesRating"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/business_list_item_text_margin_v"
+                android:rating="@{business.rating}"
+                app:layout_constraintStart_toStartOf="@+id/tvBusinessName"
+                app:layout_constraintTop_toBottomOf="@+id/tvBusinessCategory" />
+
+            <TextView
+                android:id="@+id/tvBusinessPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/business_list_item_text_margin_v"
+                android:maxLines="2"
+                android:text="@{business.price}"
+                android:textSize="@dimen/business_list_item_description_text_size"
+                app:layout_constraintEnd_toEndOf="@+id/tvBusinessName"
+                app:layout_constraintStart_toStartOf="@+id/tvBusinessName"
+                app:layout_constraintTop_toBottomOf="@+id/rbBusinessesRating"
+                tools:text="Business Price" />
+
+            <TextView
+                android:id="@+id/tvBusinessReviewCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/business_list_item_text_margin_v"
+                android:maxLines="2"
+                android:paddingBottom="@dimen/business_list_item_text_margin_v"
+                android:text="@{business.reviewCount.toString()}"
+                android:textSize="@dimen/business_list_item_description_text_size"
+                app:layout_constraintEnd_toEndOf="@+id/tvBusinessName"
+                app:layout_constraintStart_toStartOf="@+id/tvBusinessName"
+                app:layout_constraintTop_toBottomOf="@+id/tvBusinessPrice"
+                tools:text="Business Review Count" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

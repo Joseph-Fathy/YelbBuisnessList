@@ -10,4 +10,11 @@
     <color name="light_gray">#DBDBDB</color>
     <color name="dark_gray">#363636</color>
     <color name="light_black">#272727</color>
+
+    <color name="blue">#006AA6</color>
+    <color name="green">#43c35f</color>
+    <color name="orange">#f5a623</color>
+    <color name="orange_red">#da1437</color>
+    <color name="light_red">#E94558</color>
+
 </resources>

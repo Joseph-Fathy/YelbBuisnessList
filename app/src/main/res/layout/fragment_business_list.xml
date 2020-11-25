@@ -33,13 +33,12 @@
             tools:listitem="@layout/business_item"
             tools:visibility="visible" />
 
-        <!--android:visibility="@{viewModel.viewStateLiveData.isLoading?View.VISIBLE:View.GONE}"-->
         <ProgressBar
             android:id="@+id/pbLoadingBusinessesList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="2dp"
-            android:visibility="gone"
+            android:visibility="@{viewModel.viewStateLiveData.isLoading?View.VISIBLE:View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +49,7 @@
             android:id="@+id/businessesListErrorContainer"
             layout="@layout/business_error_view"
             android:visibility="@{viewModel.viewStateLiveData.error!=null?View.VISIBLE:View.GONE}"
+            app:message="@{viewModel.viewStateLiveData.error.message}"
             tools:visibility="gone" />
 
         <include

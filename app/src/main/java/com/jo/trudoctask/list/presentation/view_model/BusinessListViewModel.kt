@@ -12,6 +12,13 @@ import com.jo.trudoctask.list.presentation.view_state.BusinessListViewState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
+/**
+ * The view model of the business list fragment , it's responsible to get the list using the use case
+ * and notify the view with the result
+ *
+ * @property useCase instance of [GetBusinessesListUseCase] to get the list of businesses
+ * @property defaultDispatcher the dispatcher used to specify the coroutine scope
+ */
 class BusinessListViewModel @ViewModelInject constructor(
     private val useCase: GetBusinessesListUseCase,
     @IOCoroutineDispatcher private val defaultDispatcher: CoroutineDispatcher
@@ -20,13 +27,16 @@ class BusinessListViewModel @ViewModelInject constructor(
     var viewStateLiveData = MutableLiveData<BusinessListViewState>()
 
     init {
-        getBusinessList(0)
         viewStateLiveData.value = viewState.copy(isLoading = true)
     }
 
+    /**
+     * Get the list of businesses using the use case
+     *
+     * @param page the page wanted to load it's content starting from 0
+     */
     fun getBusinessList(page: Int) {
         viewModelScope.launch(defaultDispatcher) {
-
             val offset = page * resultsLimitCount
             val result = useCase.getBusinessList(offset = offset)
             viewState = handle(result)
@@ -35,6 +45,12 @@ class BusinessListViewModel @ViewModelInject constructor(
 
     }
 
+    /**
+     * Handle the result of the use case and covert it to view state
+     *
+     * @param result instance of BusinessesListResult that contains the data and the state
+     * @return instance of BusinessListViewState contains the state of the view
+     */
     private fun handle(result: BusinessesListResult): BusinessListViewState {
         return when (result) {
             is BusinessesListResult.Loading -> viewState.copy(isLoading = true)

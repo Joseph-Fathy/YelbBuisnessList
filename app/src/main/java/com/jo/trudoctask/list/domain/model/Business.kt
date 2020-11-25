@@ -1,7 +1,6 @@
 package com.jo.trudoctask.list.domain.model
 
 import com.google.gson.annotations.Expose
-
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -41,7 +40,7 @@ data class Business(
 
     @SerializedName("rating")
     @Expose
-    var rating: Double? = null,
+    var rating: Float = 0f,
 
     @SerializedName("phone")
     @Expose
@@ -58,4 +57,14 @@ data class Business(
     @SerializedName("location")
     @Expose
     var location: Location? = null,
-)
+) {
+    fun getCategoriesString(): String {
+        return if (categories.isNullOrEmpty()) "" else {
+            val categoriesNames: List<String> =
+                categories!!.map {
+                    it?.alias ?: ""
+                }
+            categoriesNames.joinToString()
+        }
+    }
+}

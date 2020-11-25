@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jo.trudoctask.R
 import com.jo.trudoctask.databinding.FragmentBusinessListBinding
 import com.jo.trudoctask.list.presentation.binding.setBusinessListViewState
@@ -22,19 +23,22 @@ import kotlinx.android.synthetic.main.fragment_business_list.*
 @AndroidEntryPoint
 class BusinessListFragment : Fragment() {
 
-    private val viewModel: BusinessListViewModel by viewModels()
+    private val businessListViewModel: BusinessListViewModel by viewModels()
     lateinit var binding: FragmentBusinessListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_business_list,
             container, false
         )
-        binding.lifecycleOwner = this@BusinessListFragment
+        binding.apply {
+            lifecycleOwner = this@BusinessListFragment
+            viewModel = businessListViewModel
+        }
         return binding.root
     }
 
@@ -44,22 +48,11 @@ class BusinessListFragment : Fragment() {
     }
 
     private fun init() {
-        viewModel.viewStateLiveData.observe(viewLifecycleOwner, {
-            handle(it)
-        })
-        viewModel.getBusinessList(0)
+        rvBusinessesList.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = BusinessListRecyclerViewAdapter(mutableListOf())
+        }
+        businessListViewModel.getBusinessList(0)
     }
 
-    private fun handle(viewState: BusinessListViewState) {
-        pbLoadingBusinessesList.visibility = if (viewState.isLoading) View.VISIBLE else View.GONE
-        businessesListEmptyContainer.visibility = if (viewState.isEmpty) View.VISIBLE else View.GONE
-        if (viewState.error != null) {
-            businessesListErrorContainer.visibility = View.VISIBLE
-            tvErrorMessage.text = viewState.error!!.message
-        } else
-            View.GONE
-        if (viewState.data != null && viewState.data!!.isNotEmpty())
-            rvBusinessesList.setBusinessListViewState(viewState)
-
-    }
 }
