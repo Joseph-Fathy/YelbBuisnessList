@@ -3,9 +3,6 @@ package com.jo.trudoctask.list.presentation.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.jo.trudoctask.R
@@ -17,7 +14,8 @@ import com.jo.trudoctask.list.domain.model.Business
  * [RecyclerView.Adapter] that can display a [Business].
  */
 class BusinessListRecyclerViewAdapter(
-    private val values: List<Business>
+    private var values: List<Business>,
+    private val itemClickListener: ((Business) -> Unit)?=null
 ) : RecyclerView.Adapter<BusinessListRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,9 +27,15 @@ class BusinessListRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.bind(item)
+        holder.itemView.setOnClickListener { itemClickListener?.invoke(item) }
     }
 
     override fun getItemCount(): Int = values.size
+
+    fun setData(data: List<Business>) {
+        values = data
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(item: Business) {
@@ -39,4 +43,5 @@ class BusinessListRecyclerViewAdapter(
             binding?.business = item
         }
     }
+
 }

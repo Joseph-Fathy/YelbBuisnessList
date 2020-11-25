@@ -4,15 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jo.trudoctask.R
 import com.jo.trudoctask.databinding.FragmentBusinessListBinding
-import com.jo.trudoctask.list.presentation.binding.setBusinessListViewState
 import com.jo.trudoctask.list.presentation.view_model.BusinessListViewModel
-import com.jo.trudoctask.list.presentation.view_state.BusinessListViewState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.business_error_view.*
 import kotlinx.android.synthetic.main.fragment_business_list.*
@@ -50,7 +49,9 @@ class BusinessListFragment : Fragment() {
     private fun init() {
         rvBusinessesList.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = BusinessListRecyclerViewAdapter(mutableListOf())
+            adapter = BusinessListRecyclerViewAdapter(mutableListOf()) {
+                Toast.makeText(activity, it.name, Toast.LENGTH_LONG).show()
+            }
         }
         businessListViewModel.getBusinessList(0)
     }

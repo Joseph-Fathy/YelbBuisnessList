@@ -16,7 +16,8 @@ import com.jo.trudoctask.list.presentation.view_state.BusinessListViewState
 @BindingAdapter("viewState")
 fun RecyclerView.setBusinessListViewState(viewState: BusinessListViewState?) {
     if (viewState?.data?.isNotEmpty() == true) {
-        adapter = BusinessListRecyclerViewAdapter(viewState.data!!)
+        if (adapter is BusinessListRecyclerViewAdapter)
+            (adapter as BusinessListRecyclerViewAdapter).setData(viewState.data!!)
     }
 }
 
