@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/businessListFragment">
 
+    <fragment
+        android:id="@+id/businessListFragment"
+        android:name="com.jo.trudoctask.list.presentation.view.BusinessListFragment"
+        android:label="BusinessListFragment">
+        <action
+            android:id="@+id/action_businessListFragment_to_businessDetailsFragment"
+            app:destination="@id/businessDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/businessDetailsFragment"
+        android:name="com.jo.trudoctask.details.presentation.BusinessDetailsFragment"
+        android:label="fragment_business_details"
+        tools:layout="@layout/fragment_business_details">
+        <argument android:name="argsBusiness"
+            app:argType="com.jo.trudoctask.list.domain.model.Business"/>
+    </fragment>
 </navigation>

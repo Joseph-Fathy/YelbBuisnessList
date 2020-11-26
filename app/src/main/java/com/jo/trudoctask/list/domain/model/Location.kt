@@ -1,8 +1,10 @@
 package com.jo.trudoctask.list.domain.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 /**
  * Location of a business, including address, city, state, zip code and country.
@@ -15,6 +17,7 @@ import com.google.gson.annotations.SerializedName
  * @property state ISO 3166-2 (with a few exceptions) state code of this business.
  * @property zipCode Zip code of this business.
  */
+@Parcelize
 data class Location(
     @SerializedName("city")
     @Expose
@@ -43,4 +46,4 @@ data class Location(
     @SerializedName("zip_code")
     @Expose
     var zipCode: String? = null
-)
+):Parcelable

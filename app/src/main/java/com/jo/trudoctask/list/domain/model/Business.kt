@@ -1,7 +1,9 @@
 package com.jo.trudoctask.list.domain.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 /**
  * Data class of the business items in the list
@@ -16,6 +18,7 @@ import com.google.gson.annotations.SerializedName
  * @property reviewCount Number of reviews for this business.
  * @property location Location of this business, including address, city, state, zip code and country.
  */
+@Parcelize
 data class Business(
 
     @SerializedName("id")
@@ -57,7 +60,7 @@ data class Business(
     @SerializedName("location")
     @Expose
     var location: Location? = null,
-) {
+) : Parcelable {
     fun getCategoriesString(): String {
         return if (categories.isNullOrEmpty()) "" else {
             val categoriesNames: List<String> =
