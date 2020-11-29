@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/businessDetailsFragment"
-        android:name="com.jo.trudoctask.details.presentation.BusinessDetailsFragment"
+        android:name="com.jo.trudoctask.details.presentation.view.BusinessDetailsFragment"
         android:label="fragment_business_details"
         tools:layout="@layout/fragment_business_details">
         <argument android:name="argsBusiness"
